@@ -10,13 +10,26 @@ class String
   def first_letter
     self[0]
   end
+
+  def last_letter
+    self[-1]
+  end
+
+  def half_length
+    length.even? ? (length/2 - 1) : (length/2)
+  end
 end
 
 class Array
   def remove_nils
     select { |item| !item.nil? }
   end
+
   def remove_false
     select { |item| !(item == false) }
+  end
+
+  def reverse_each_item
+    map(&:reverse)
   end
 end
