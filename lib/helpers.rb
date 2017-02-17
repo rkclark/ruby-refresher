@@ -32,4 +32,13 @@ class Array
   def reverse_each_item
     map(&:reverse)
   end
+  def get_average
+    (self.inject(:+)/length.to_f).ceil
+  end
+end
+
+class Integer
+  def make_negative
+    negative? ? self : (0 - self)
+  end
 end
