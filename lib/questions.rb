@@ -7,16 +7,17 @@ end
 
 # keep only the elements that start with a vowel
 def select_elements_starting_with_vowel(array)
-  array.select { |item| 'aeiou'.include?(item[0]) }
+  array.select { |string| string.starts_with_vowel? }
 end
 
 # remove instances of nil (but NOT false) from an array
 def remove_nils_from_array(array)
-
+  array.remove_nils
 end
 
 # remove instances of nil AND false from an array
 def remove_nils_and_false_from_array(array)
+  array.remove_nils.remove_false
 end
 
 # don't reverse the array, but reverse every word inside it. e.g.
