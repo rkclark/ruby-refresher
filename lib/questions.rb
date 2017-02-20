@@ -128,9 +128,7 @@ end
 # {'a' => 'b', 'c' => 'd'}
 def convert_array_to_a_hash(array)
   h = {}
-  while array.length > 0 do
-    h[array.shift] = array.shift
-  end
+  h[array.shift] = array.shift until array.empty?
   h
 end
 
@@ -192,11 +190,10 @@ end
 # 'the lion the witch and the wardrobe' becomes
 # 'The Lion the Witch and the Wardrobe'
 def titleize_a_string(string)
-  ignored = ["a", "and", "the"]
-  string.split.map.with_index {
-    |word, idx|
+  ignored = %w[a and the]
+  string.split.map.with_index do |word, idx|
     ignored.include?(word) && idx > 0 ? word : word.capitalize
-  }.join(" ")
+  end.join(" ")
 end
 
 # return true if a string contains any special characters
@@ -250,7 +247,7 @@ def is_a_2014_bank_holiday?(date)
     "05/05/2014",
     "21/04/2014",
     "18/04/2014",
-    "01/01/2014",
+    "01/01/2014"
   ]
   bank_hols.include?(date.strftime("%d/%m/%Y"))
 end
@@ -263,7 +260,7 @@ def your_birthday_is_on_a_friday_in_the_year(birthday)
   day = birthday.day
   month = birthday.month
   year = birthday.year
-  while true do
+  loop do
     year += 1
     birthday = DateTime.new(year, month, day)
     break if birthday.friday?
@@ -283,7 +280,7 @@ def count_words_of_each_length_in_a_file(file_path)
   array = f.readlines.join.gsub(/[.,]/, "").split(" ").sort_by(&:length)
   longest = array[-1].length
   results = {}
-  for i in 1..longest
+  (1..longest).each do |i|
     results[i] = array.count { |w| w.length == i }
   end
   results
